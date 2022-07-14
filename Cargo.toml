@@ -1,0 +1,35 @@
+[package]
+name = "trace_event"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+rlibc = "1.0.0"
+
+[profile.dev]
+panic = "abort"
+
+[profile.release]
+panic = "abort"
+
+[inner_unikernel]
+helpers = [
+    "bpf_map_lookup_elem",
+    "bpf_map_update_elem",
+    "bpf_trace_printk",
+    "bpf_get_current_comm",
+    "bpf_get_smp_processor_id",
+    "bpf_get_stackid",
+    "bpf_perf_prog_read_value",
+]
+
+# leaving as stub for now as a reminder
+headers = [
+    "linux/bpf.h",
+    "linux/ptrace.h",
+    "linux/perf_event.h",
+    "linux/bpf_perf_event.h",
+    "linux/errno.h",
+]
